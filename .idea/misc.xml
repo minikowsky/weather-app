@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/SemVI/MIM/WeatherApp/app/src/main/res/layout-land/activity_main.xml" value="0.18229166666666666" />
+        <entry key="..\:/SemVI/MIM/WeatherApp/app/src/main/res/layout-land/activity_main_portrait.xml" value="0.18229166666666666" />
+        <entry key="..\:/SemVI/MIM/WeatherApp/app/src/main/res/layout-land/fragment_settings.xml" value="0.18229166666666666" />
+        <entry key="..\:/SemVI/MIM/WeatherApp/app/src/main/res/layout-land/fragment_weather.xml" value="0.18229166666666666" />
+        <entry key="..\:/SemVI/MIM/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.16" />
+        <entry key="..\:/SemVI/MIM/WeatherApp/app/src/main/res/layout/activity_main_landscape.xml" value="0.32407407407407407" />
+        <entry key="..\:/SemVI/MIM/WeatherApp/app/src/main/res/layout/fragment_settings.xml" value="0.264" />
+        <entry key="..\:/SemVI/MIM/WeatherApp/app/src/main/res/layout/fragment_weather.xml" value="0.33" />
+        <entry key="..\:/SemVI/MIM/WeatherApp/app/src/main/res/layout/fragment_weather_landscape.xml" value="0.25" />
+        <entry key="..\:/SemVI/MIM/WeatherApp/app/src/main/res/menu/menu_weather.xml" value="0.14166666666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
