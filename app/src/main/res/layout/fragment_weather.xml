@@ -10,20 +10,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/text_view_date"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="01/03/2022"
             android:textSize="20sp"
             android:layout_weight="1"
             />
 
         <TextView
+            android:id="@+id/text_view_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="13:56"
             android:textSize="20sp"/>
 
     </LinearLayout>
@@ -32,17 +33,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:orientation="horizontal">
 
         <EditText
-            android:layout_width="match_parent"
+            android:id="@+id/edit_text_city"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:hint="Wpisz nazwę miejscowości"
-            android:textSize="24sp"
-            android:gravity="center_horizontal"
-            android:layout_margin="20dp"
+            android:hint="@string/city_edit_txt_hint"
+            android:textSize="20sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textAlignment="center"
+            />
+
+        <ImageButton
+            android:id="@+id/button_set_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_check_24"
+            android:layout_margin="10dp"
+            android:background="@color/orange_700"
             />
 
 
@@ -56,32 +66,34 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:id="@+id/image_view_icon"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:src="@mipmap/cloud"
             android:layout_gravity="center" />
         <TextView
+            android:id="@+id/text_view_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Słonecznie"
             android:textSize="25sp"
             android:layout_gravity="center"
             />
 
         <TextView
+            android:id="@+id/text_view_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20°C"
-            android:textSize="100sp"
+            android:textSize="80sp"
             android:textStyle="bold"
             android:layout_gravity="center"
             />
 
         <TextView
+            android:id="@+id/text_view_pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1013 hPa"
-            android:textSize="35sp"
+            android:text="@string/loading_data"
+            android:textSize="32sp"
             android:layout_gravity="center"
             />
 
@@ -97,19 +109,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            tools:ignore="NestedWeights">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:src="@mipmap/sunrise"
                 android:layout_gravity="center" />
 
             <TextView
+                android:id="@+id/text_view_sunrise"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="06:41"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:layout_gravity="center"
                 />
 
@@ -121,16 +134,16 @@
             android:layout_weight="1">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:src="@mipmap/sunset"
                 android:layout_gravity="center" />
 
             <TextView
+                android:id="@+id/text_view_sunset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="17:51"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:layout_gravity="center"
                 />
 

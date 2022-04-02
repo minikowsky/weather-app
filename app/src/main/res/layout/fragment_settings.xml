@@ -5,50 +5,74 @@
     android:layout_height="match_parent"
     tools:context=".ui.SettingsFragment"
     android:orientation="vertical"
-    android:layout_margin="30dp">
+    android:layout_margin="10dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ustawienia"
         android:textAlignment="center"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:layout_marginBottom="50dp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="30dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Język"
-            android:textSize="20sp"
-            android:gravity="center"/>
-        <Button
+        android:textSize="24sp"
+        android:text="Jednostka miary" />
+
+    <RadioGroup
+        android:id="@+id/units_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp">
+        <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Angielski"
-            android:layout_marginStart="120dp"/>
-    </LinearLayout>
+            android:id="@+id/units_radio_metric"
+            android:textSize="18sp"
+            android:text="Metryczny [°C]"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/units_radio_imperial"
+            android:textSize="18sp"
+            android:text="Imperialny [°F]"/>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/units_radio_standard"
+            android:textSize="18sp"
+            android:text="Standardowy [K]"/>
+
+    </RadioGroup>
 
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tryb dla osób starszych"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:gravity="center"/>
         <Switch
+            android:id="@+id/switch_elders"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:ignore="UseSwitchCompatOrMaterialXml"
             android:layout_marginStart="30dp"/>
     </LinearLayout>
+<!--
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="50dp"
+        android:text="Zapisz"
+        android:id="@+id/button_settings_save"/>-->
 </LinearLayout>

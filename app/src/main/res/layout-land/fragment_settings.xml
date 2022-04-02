@@ -7,32 +7,53 @@
     android:orientation="vertical"
     android:layout_marginStart="100dp"
     android:layout_marginEnd="100dp"
-    android:layout_marginTop="30dp">
+    android:layout_marginTop="10dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ustawienia"
         android:textAlignment="center"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:layout_marginBottom="50dp"/>
     
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginBottom="30dp">
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Język"
-            android:textSize="20sp"
-            android:gravity="center"/>
-        <Button
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:text="Jednostka miary" />
+
+        <RadioGroup
+            android:id="@+id/units_radio_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Angielski"
-            android:layout_marginStart="160dp"/>
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/units_radio_metric"
+                android:textSize="18sp"
+                android:text="Metryczny [°C]"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/units_radio_imperial"
+                android:textSize="18sp"
+                android:text="Imperialny [°F]"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/units_radio_standard"
+                android:textSize="18sp"
+                android:text="Standardowy [K]"/>
+
+        </RadioGroup>
     </LinearLayout>
 
 

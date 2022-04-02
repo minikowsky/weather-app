@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_weatherFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_weatherFragment_to_weatherEldersFragment"
+            app:destination="@id/weatherEldersFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -22,5 +25,17 @@
         <action
             android:id="@+id/action_settingsFragment_to_weatherFragment"
             app:destination="@id/weatherFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_weatherEldersFragment"
+            app:destination="@id/weatherEldersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherEldersFragment"
+        android:name="com.example.weatherapp.ui.WeatherEldersFragment"
+        android:label="fragment_weather_elders"
+        tools:layout="@layout/fragment_weather_elders" >
+        <action
+            android:id="@+id/action_weatherEldersFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 </navigation>
