@@ -1,6 +1,9 @@
 package com.example.weatherapp.viewmodels
 
+import android.content.Context
+import android.util.Log
 import androidx.lifecycle.*
+import com.example.weatherapp.MainActivity
 import com.example.weatherapp.data.WeatherRepository
 import com.example.weatherapp.data.weather.WeatherAPIResponse
 import kotlinx.coroutines.launch
@@ -31,4 +34,17 @@ class WeatherViewModel : ViewModel(){
         }
     }
 
+    fun getWeatherByLocation(unit: String, latitude: Double?, longitude: Double?) {
+        if(latitude == null || longitude == null) {
+            getWeather(unit)
+        }
+
+        viewModelScope.launch {
+            val w = WeatherRepository.getByLocation(unit, latitude.toString(), longitude.toString())
+            if(w != null) {
+                _weather.value = w!!
+                Log.i("ApiResponse LOCATION",w.toString())
+            }
+        }
+    }
 }
