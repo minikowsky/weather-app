@@ -18,15 +18,25 @@
             android:id="@+id/text_view_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="16sp"
+            android:textAlignment="textStart"
             android:layout_weight="1"
             />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:id="@+id/text_view_city_name"/>
 
         <TextView
             android:id="@+id/text_view_time"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"/>
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textSize="16sp"/>
 
     </LinearLayout>
 
@@ -44,6 +54,7 @@
             android:hint="@string/city_edit_txt_hint"
             android:textSize="20sp"
             android:layout_marginStart="20dp"
+            android:layout_weight="1"
             android:layout_marginEnd="20dp"
             android:textAlignment="center"
             />
@@ -56,8 +67,6 @@
             android:layout_margin="10dp"
             android:background="@color/orange_700"
             />
-
-
     </LinearLayout>
 
     <!-- Main -->
@@ -101,7 +110,7 @@
                 android:id="@+id/text_view_temp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="80sp"
+                android:textSize="60sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 />
@@ -110,28 +119,114 @@
                 android:id="@+id/text_view_pressure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="32sp"
+                android:textSize="24sp"
                 android:text="@string/loading_data"
                 android:layout_gravity="center"
                 />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Temp. odczuwalna"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="32"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:id="@+id/text_view_feels_like"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Prędkość wiatru"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2km/h"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:id="@+id/text_view_wind_speed"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Zachmurzenie"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100%"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:id="@+id/text_view_cloudiness"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="Wilgotność"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="64%"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:id="@+id/text_view_humidity"/>
+            </LinearLayout>
+        </LinearLayout>
+
         <!-- Sunrise sunset-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_gravity="center">
             <!-- sunrise -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_margin="5dp">
+                android:layout_weight="1"
+                android:layout_gravity="center">
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@mipmap/sunrise"
                     android:layout_gravity="center" />
 
@@ -139,7 +234,7 @@
                     android:id="@+id/text_view_sunrise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:layout_gravity="center"
                     />
             </LinearLayout>
@@ -149,12 +244,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_margin="5dp">
+                android:layout_weight="1"
+                android:layout_gravity="center">
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@mipmap/sunset"
                     android:layout_gravity="center" />
 
@@ -162,7 +257,7 @@
                     android:id="@+id/text_view_sunset"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:layout_gravity="center"
                     />
 

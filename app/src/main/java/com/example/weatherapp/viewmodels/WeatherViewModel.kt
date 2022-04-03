@@ -1,13 +1,14 @@
 package com.example.weatherapp.viewmodels
 
-import android.content.Context
-import android.util.Log
-import androidx.lifecycle.*
-import com.example.weatherapp.MainActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.data.WeatherRepository
 import com.example.weatherapp.data.weather.WeatherAPIResponse
 import kotlinx.coroutines.launch
-import java.lang.IllegalArgumentException
+
+private const val DEFAULT_CITY: String = "Perth"
 
 class WeatherViewModel : ViewModel(){
     private val _weather: MutableLiveData<WeatherAPIResponse> = MutableLiveData()
@@ -16,18 +17,9 @@ class WeatherViewModel : ViewModel(){
             return _weather
         }
 
-    fun getWeather(unit: String) {
+    fun getWeather(unit: String, city: String = DEFAULT_CITY) {
         viewModelScope.launch {
-            val w = WeatherRepository.get(unit)
-            if(w != null){
-                _weather.value = w!!
-            }
-        }
-    }
-
-    fun getWeatherByCity(unit: String, city: String) {
-        viewModelScope.launch {
-            val w = WeatherRepository.getByCity(unit, city)
+            val w = WeatherRepository.get(unit, city)
             if(w != null) {
                 _weather.value = w!!
             }
@@ -43,7 +35,6 @@ class WeatherViewModel : ViewModel(){
             val w = WeatherRepository.getByLocation(unit, latitude.toString(), longitude.toString())
             if(w != null) {
                 _weather.value = w!!
-                Log.i("ApiResponse LOCATION",w.toString())
             }
         }
     }

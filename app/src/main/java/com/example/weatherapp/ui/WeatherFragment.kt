@@ -58,47 +58,94 @@ class WeatherFragment : Fragment() {
             Context.MODE_PRIVATE
         )
 
+        val degree: String = when(sharedPref.getString("Unit", Unit.METRIC)) {
+            Unit.METRIC -> Unit.Symbol.Degree.METRIC
+            Unit.IMPERIAL -> Unit.Symbol.Degree.IMPERIAL
+            else -> Unit.Symbol.Degree.STANDARD
+        }
+
+        val speed: String = when(sharedPref.getString("Unit", Unit.METRIC)) {
+            Unit.METRIC -> Unit.Symbol.Speed.METRIC
+            Unit.IMPERIAL -> Unit.Symbol.Speed.IMPERIAL
+            else -> Unit.Symbol.Speed.STANDARD
+        }
 
         viewModel.weather.observe(viewLifecycleOwner) {
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
             val timeFormat = SimpleDateFormat("HH:mm",Locale.ENGLISH)
+
+            //Date
             view.findViewById<TextView>(R.id.text_view_date)
                 .text = dateFormat.format(Date(it.dt * 1000L))
+            //City
+            view.findViewById<TextView>(R.id.text_view_city_name)
+                .text = it.name
+            //Time
             view.findViewById<TextView>(R.id.text_view_time)
                 .text = timeFormat.format(Date(it.dt * 1000L))
 
+            //Description
             view.findViewById<TextView>(R.id.text_view_description)
                 .text = it.weather[0].description
-
-            val unitSymbol: String = when(sharedPref.getString("Unit", Unit.METRIC)) {
-                Unit.METRIC -> Unit.Symbol.METRIC
-                Unit.IMPERIAL -> Unit.Symbol.IMPERIAL
-                else -> Unit.Symbol.STANDARD
-            }
-
+            //Temperature
             view.findViewById<TextView>(R.id.text_view_temp)
-                .text = "${it.main.temp} $unitSymbol"
+                .text = "${it.main.temp} $degree"
+            //Pressure
             view.findViewById<TextView>(R.id.text_view_pressure)
                 .text = "${it.main.pressure} hPa"
+
+
+            //Feels like
+            view.findViewById<TextView>(R.id.text_view_feels_like)
+                .text = "${it.main.feels_like} $degree"
+            //Wind speed
+            view.findViewById<TextView>(R.id.text_view_wind_speed)
+                .text = "${it.wind.speed} $speed"
+            //Cloudiness
+            view.findViewById<TextView>(R.id.text_view_cloudiness)
+                .text = "${it.clouds?.all ?: 0}%"
+            //Humidity
+            view.findViewById<TextView>(R.id.text_view_humidity)
+                .text = "${it.main.humidity} %"
+
+
+            //Sunrise time
             view.findViewById<TextView>(R.id.text_view_sunrise)
                 .text = timeFormat.format(Date(it.sys.sunrise * 1000L))
+            //Sunset time
             view.findViewById<TextView>(R.id.text_view_sunset)
                 .text = timeFormat.format(Date(it.sys.sunset * 1000L))
         }
-
-
 
         view.findViewById<ImageButton>(R.id.button_set_city).setOnClickListener{
             val city: String = view.findViewById<EditText>(R.id.edit_text_city).text.toString()
             if(city.isNotBlank())
                 sharedPref.getString("Unit", Unit.METRIC)
-                    ?.let { it1 -> viewModel.getWeatherByCity(it1,city) }
+                    ?.let { it1 -> viewModel.getWeather(it1,city) }
 
         }
 
+        //Loading data for default city (Perth)
         sharedPref.getString("Unit", Unit.METRIC)?.let { viewModel.getWeather(it) }
 
+        //Updating data if location permission is granted
         requestForLocationPermission()
+    }
+
+    private fun requestForLocationPermission() {
+        when {
+            ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                println("GRANTED!!!")
+                loadWeatherByLocation()
+            }
+            else -> {
+                requestPermissionLauncher.launch(
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+        }
     }
 
     private val requestPermissionLauncher = registerForActivityResult(
@@ -124,37 +171,9 @@ class WeatherFragment : Fragment() {
 
                 sharedPref.getString("Unit", Unit.METRIC)?.let { viewModel.getWeatherByLocation(it,latitude,longitude) }
             }
-        //
     }
 
-    private fun isLocationEnabled(): Boolean {
-        return !(ActivityCompat.checkSelfPermission(
-            requireContext(),
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) != PackageManager.PERMISSION_GRANTED
-
-                && ActivityCompat.checkSelfPermission(
-            requireContext(),
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ) != PackageManager.PERMISSION_GRANTED)
-    }
-
-    private fun requestForLocationPermission() {
-        when {
-            ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                println("GRANTED!!!")
-                loadWeatherByLocation()
-            }
-            else -> {
-                requestPermissionLauncher.launch(
-                    android.Manifest.permission.ACCESS_FINE_LOCATION)
-            }
-        }
-    }
-
+    //TOP BAR MENU
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_weather,menu)
         super.onCreateOptionsMenu(menu, inflater)

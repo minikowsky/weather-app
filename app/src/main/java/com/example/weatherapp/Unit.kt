@@ -6,8 +6,17 @@ object Unit {
     const val STANDARD: String = "standard"
 
     object Symbol {
-        const val METRIC: String = "°C"
-        const val IMPERIAL: String = "°F"
-        const val STANDARD: String = "K"
+
+        object Degree {
+            const val METRIC: String = "°C"
+            const val IMPERIAL: String = "°F"
+            const val STANDARD: String = "K"
+        }
+
+        object Speed {
+            const val METRIC: String = "m/s"
+            const val IMPERIAL: String = "m/s"
+            const val STANDARD: String = "mil/hour"
+        }
     }
 }
