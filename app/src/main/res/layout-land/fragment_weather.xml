@@ -7,7 +7,6 @@
     android:layout_margin="5dp"
     android:orientation="vertical">
 
-
     <!-- Date time -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,6 +26,7 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:textAlignment="center"
             android:id="@+id/text_view_city_name"/>
 
@@ -49,7 +49,7 @@
 
         <EditText
             android:id="@+id/edit_text_city"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:hint="@string/city_edit_txt_hint"
             android:textSize="20sp"
@@ -87,7 +87,6 @@
                 android:id="@+id/image_view_icon"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@mipmap/cloud"
                 android:layout_gravity="center" />
             <TextView
                 android:id="@+id/text_view_description"
@@ -140,11 +139,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="Temp. odczuwalna"/>
+                    android:text="@string/feels_like"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="32"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:id="@+id/text_view_feels_like"/>
@@ -160,11 +158,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="Prędkość wiatru"/>
+                    android:text="@string/wind_speed"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2km/h"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:id="@+id/text_view_wind_speed"/>
@@ -179,11 +176,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="Zachmurzenie"/>
+                    android:text="@string/cloudiness"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="100%"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:id="@+id/text_view_cloudiness"/>
@@ -199,11 +195,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:text="Wilgotność"/>
+                    android:text="@string/humidity"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="64%"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:id="@+id/text_view_humidity"/>
@@ -260,10 +255,7 @@
                     android:textSize="20sp"
                     android:layout_gravity="center"
                     />
-
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

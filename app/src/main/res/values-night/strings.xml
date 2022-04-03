@@ -2,4 +2,5 @@
 <resources>
     <string name="city_edit_txt_hint">Wpisz nazwę miejscowości</string>
     <string name="loading_data">Ładowanie danych</string>
+    <string name="metric">Metryczny [°C,m/s]</string>
 </resources>

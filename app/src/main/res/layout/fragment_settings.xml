@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ustawienia"
+        android:text="@string/settings"
         android:textAlignment="center"
         android:textSize="30sp"
         android:layout_marginBottom="50dp"/>
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:text="Jednostka miary" />
+        android:text="@string/unit" />
 
     <RadioGroup
         android:id="@+id/units_radio_group"
@@ -31,19 +31,19 @@
             android:layout_height="wrap_content"
             android:id="@+id/units_radio_metric"
             android:textSize="18sp"
-            android:text="Metryczny [°C]"/>
+            android:text="@string/metric"/>
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/units_radio_imperial"
             android:textSize="18sp"
-            android:text="Imperialny [°F]"/>
+            android:text="@string/imperial"/>
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/units_radio_standard"
             android:textSize="18sp"
-            android:text="Standardowy [K]"/>
+            android:text="@string/standard"/>
 
     </RadioGroup>
 
@@ -57,7 +57,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tryb dla osób starszych"
+            android:text="@string/elder_mode"
             android:textSize="24sp"
             android:gravity="center"/>
         <Switch

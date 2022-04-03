@@ -5,28 +5,23 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.*
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.example.weatherapp.MainActivity
 import com.example.weatherapp.R
-import com.example.weatherapp.Unit
-import com.example.weatherapp.data.weather.Main
+import com.example.weatherapp.tools.Unit
+import com.example.weatherapp.tools.WeatherIconTool
 import com.example.weatherapp.viewmodels.WeatherViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import java.sql.Date
-import java.sql.Time
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -53,23 +48,27 @@ class WeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //user preferences, for instance units or application mode (for elders or normal)
         val sharedPref = (activity as MainActivity).applicationContext.getSharedPreferences(
             "UserPreferences",
             Context.MODE_PRIVATE
         )
 
+        //temperature degree symbol depends on unit
         val degree: String = when(sharedPref.getString("Unit", Unit.METRIC)) {
-            Unit.METRIC -> Unit.Symbol.Degree.METRIC
-            Unit.IMPERIAL -> Unit.Symbol.Degree.IMPERIAL
-            else -> Unit.Symbol.Degree.STANDARD
+            Unit.METRIC -> Unit.Degree.METRIC
+            Unit.IMPERIAL -> Unit.Degree.IMPERIAL
+            else -> Unit.Degree.STANDARD
         }
 
+        //speed depends on unit
         val speed: String = when(sharedPref.getString("Unit", Unit.METRIC)) {
-            Unit.METRIC -> Unit.Symbol.Speed.METRIC
-            Unit.IMPERIAL -> Unit.Symbol.Speed.IMPERIAL
-            else -> Unit.Symbol.Speed.STANDARD
+            Unit.METRIC -> Unit.Speed.METRIC
+            Unit.IMPERIAL -> Unit.Speed.IMPERIAL
+            else -> Unit.Speed.STANDARD
         }
 
+        //setting view components to observe changes in viewmodel
         viewModel.weather.observe(viewLifecycleOwner) {
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
             val timeFormat = SimpleDateFormat("HH:mm",Locale.ENGLISH)
@@ -84,6 +83,9 @@ class WeatherFragment : Fragment() {
             view.findViewById<TextView>(R.id.text_view_time)
                 .text = timeFormat.format(Date(it.dt * 1000L))
 
+            //Image
+            view.findViewById<ImageView>(R.id.image_view_icon)
+                .setImageResource(WeatherIconTool.getMipmapId(it.weather[0].icon))
             //Description
             view.findViewById<TextView>(R.id.text_view_description)
                 .text = it.weather[0].description
@@ -134,13 +136,14 @@ class WeatherFragment : Fragment() {
 
     private fun requestForLocationPermission() {
         when {
+            // if permission is granted then load weather by location
             ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED -> {
-                println("GRANTED!!!")
                 loadWeatherByLocation()
             }
+            //if not, ask for permission
             else -> {
                 requestPermissionLauncher.launch(
                     Manifest.permission.ACCESS_FINE_LOCATION)
@@ -148,27 +151,27 @@ class WeatherFragment : Fragment() {
         }
     }
 
+    //permission launcher that asks for location permisson
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted:Boolean ->
         if(isGranted) {
+            //if is granted, then load weather by location
             loadWeatherByLocation()
-            } else {
-                Log.i("Permission", "Denied")
-        }
+            }
     }
 
     private fun loadWeatherByLocation() {
+        //get user preferences to get unit
         val sharedPref = (activity as MainActivity).applicationContext.getSharedPreferences(
             "UserPreferences",
             Context.MODE_PRIVATE
         )
+        //when location is available, get weather by location
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
                 val latitude = location?.latitude
                 val longitude = location?.longitude
-                println("$latitude $longitude")
-
                 sharedPref.getString("Unit", Unit.METRIC)?.let { viewModel.getWeatherByLocation(it,latitude,longitude) }
             }
     }

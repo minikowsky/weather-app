@@ -1,20 +1,16 @@
 package com.example.weatherapp.ui
 
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Switch
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.example.weatherapp.MainActivity
 import com.example.weatherapp.R
-import com.example.weatherapp.Unit
+import com.example.weatherapp.tools.Unit
 
 class SettingsFragment : Fragment() {
 
@@ -35,15 +31,16 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //get user preferences to get unit
         val sharedPref = (activity as MainActivity).applicationContext.getSharedPreferences("UserPreferences",MODE_PRIVATE)
 
-
-        when(sharedPref.getString("Unit",Unit.METRIC)){
+        //setting current unit
+        when(sharedPref.getString("Unit", Unit.METRIC)){
             Unit.METRIC -> view.findViewById<RadioButton>(R.id.units_radio_metric).isChecked = true
             Unit.IMPERIAL -> view.findViewById<RadioButton>(R.id.units_radio_imperial).isChecked = true
             Unit.STANDARD -> view.findViewById<RadioButton>(R.id.units_radio_standard).isChecked = true
         }
-
+        //setting current application mode
         when(sharedPref.getBoolean("ElderMode", false)){
             false -> view.findViewById<Switch>(R.id.switch_elders).isChecked = false
             true -> view.findViewById<Switch>(R.id.switch_elders).isChecked = true
@@ -51,6 +48,7 @@ class SettingsFragment : Fragment() {
 
         view.findViewById<RadioGroup>(R.id.units_radio_group)
             .setOnCheckedChangeListener{_, checkedId ->
+                //when radiobutton is clicked(changed), update user preferences
             when(checkedId) {
                 R.id.units_radio_metric ->
                     with (sharedPref.edit()) {
@@ -72,14 +70,13 @@ class SettingsFragment : Fragment() {
 
         view.findViewById<Switch>(R.id.switch_elders)
             .setOnCheckedChangeListener { _, isChecked ->
+                //when application mode switch changes, update user preferences
                 if(isChecked) {
-                    //println("Checked!")
                     with (sharedPref.edit()) {
                         putBoolean("ElderMode", true)
                         apply()
                     }
                 } else {
-                    //println("UnChecked!")
                     with (sharedPref.edit()) {
                         putBoolean("ElderMode", false)
                         apply()
