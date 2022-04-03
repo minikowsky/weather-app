@@ -44,6 +44,11 @@ class SettingsFragment : Fragment() {
             Unit.STANDARD -> view.findViewById<RadioButton>(R.id.units_radio_standard).isChecked = true
         }
 
+        when(sharedPref.getBoolean("ElderMode", false)){
+            false -> view.findViewById<Switch>(R.id.switch_elders).isChecked = false
+            true -> view.findViewById<Switch>(R.id.switch_elders).isChecked = true
+        }
+
         view.findViewById<RadioGroup>(R.id.units_radio_group)
             .setOnCheckedChangeListener{_, checkedId ->
             when(checkedId) {
@@ -65,7 +70,6 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        //TODO: change layout for elders
         view.findViewById<Switch>(R.id.switch_elders)
             .setOnCheckedChangeListener { _, isChecked ->
                 if(isChecked) {
